@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
     <title>Registration Form</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <form action="#" method="post">
+    <form id="registrationForm">
         <label for="fullname">Full Name:</label>
-        <input type="text" id="fullname" name="fullname" pattern="[A-Za-z\s]+" title="Only alphabetic characters and spaces are allowed." required>
+        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name">
+        <span class="error-message" id="fullnameError"></span>
 
         <label for="email">Email Address:</label>
-        <input type="email" id="email" name="email" title="Please enter a valid email address." required>
+        <input type="text" id="email" name="email" placeholder="Enter your email">
+        <span class="error-message" id="emailError"></span>
 
         <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone" name="phone" pattern="\d{10,15}" title="Phone number must be 10-15 digits." required>
+        <input type="text" id="phone" name="phone" placeholder="Enter your phone number">
+        <span class="error-message" id="phoneError"></span>
 
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password must be at least 8 characters long, including one uppercase letter, one lowercase letter, and one number." required>
+        <input type="password" id="password" name="password" placeholder="Enter your password">
+        <span class="error-message" id="passwordError"></span>
 
         <input type="submit" value="Submit">
     </form>
 
-     <div id="successMessage" class="success-message"></div>
+    <div id="successMessage" class="success-message"></div>
 
     <script src="script.js"></script>
-
 </body>
 </html>
