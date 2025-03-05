@@ -1,7 +1,6 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    padding_right: 10px;
 }
 
 form {
@@ -25,6 +24,7 @@ input[type="tel"],
 input[type="password"] {
     width: 100%;
     padding: 8px;
+    padding-right: 20px; /* Add padding to the right side */
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -60,4 +60,8 @@ input[type="submit"]:hover {
 
 .invalid {
     border: 1px solid red;
+}
+
+.valid {
+    border: 1px solid green;
 }
