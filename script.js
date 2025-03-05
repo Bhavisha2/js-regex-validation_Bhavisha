@@ -1,19 +1,28 @@
-document.getElementById("registrationForm").addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent form submission
+document.addEventListener("DOMContentLoaded", function () {
+    // Add input event listeners for real-time validation
+    document.getElementById("fullname").addEventListener("input", validateFullName);
+    document.getElementById("email").addEventListener("input", validateEmail);
+    document.getElementById("phone").addEventListener("input", validatePhone);
+    document.getElementById("password").addEventListener("input", validatePassword);
 
-    // Clear previous errors
-    clearErrors();
+    // Form submission handler
+    document.getElementById("registrationForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent form submission
 
-    // Validate inputs
-    const isFullNameValid = validateFullName();
-    const isEmailValid = validateEmail();
-    const isPhoneValid = validatePhone();
-    const isPasswordValid = validatePassword();
+        // Clear previous errors
+        clearErrors();
 
-    // If all fields are valid, display success message
-    if (isFullNameValid && isEmailValid && isPhoneValid && isPasswordValid) {
-        document.getElementById("successMessage").textContent = "Form submitted successfully!";
-    }
+        // Validate inputs
+        const isFullNameValid = validateFullName();
+        const isEmailValid = validateEmail();
+        const isPhoneValid = validatePhone();
+        const isPasswordValid = validatePassword();
+
+        // If all fields are valid, display success message
+        if (isFullNameValid && isEmailValid && isPhoneValid && isPasswordValid) {
+            document.getElementById("successMessage").textContent = "Form submitted successfully!";
+        }
+    });
 });
 
 function validateFullName() {
@@ -23,8 +32,11 @@ function validateFullName() {
         displayError("fullnameError", "Full Name must contain only letters and spaces.");
         highlightInvalidField("fullname");
         return false;
+    } else {
+        clearError("fullnameError");
+        highlightValidField("fullname");
+        return true;
     }
-    return true;
 }
 
 function validateEmail() {
@@ -34,8 +46,11 @@ function validateEmail() {
         displayError("emailError", "Please enter a valid email address.");
         highlightInvalidField("email");
         return false;
+    } else {
+        clearError("emailError");
+        highlightValidField("email");
+        return true;
     }
-    return true;
 }
 
 function validatePhone() {
@@ -45,8 +60,11 @@ function validatePhone() {
         displayError("phoneError", "Phone number must be 10-15 digits.");
         highlightInvalidField("phone");
         return false;
+    } else {
+        clearError("phoneError");
+        highlightValidField("phone");
+        return true;
     }
-    return true;
 }
 
 function validatePassword() {
@@ -56,16 +74,29 @@ function validatePassword() {
         displayError("passwordError", "Password must be at least 8 characters long, including one uppercase letter, one lowercase letter, and one number.");
         highlightInvalidField("password");
         return false;
+    } else {
+        clearError("passwordError");
+        highlightValidField("password");
+        return true;
     }
-    return true;
 }
 
 function displayError(elementId, message) {
     document.getElementById(elementId).textContent = message;
 }
 
+function clearError(elementId) {
+    document.getElementById(elementId).textContent = "";
+}
+
 function highlightInvalidField(fieldId) {
+    document.getElementById(fieldId).classList.remove("valid");
     document.getElementById(fieldId).classList.add("invalid");
+}
+
+function highlightValidField(fieldId) {
+    document.getElementById(fieldId).classList.remove("invalid");
+    document.getElementById(fieldId).classList.add("valid");
 }
 
 function clearErrors() {
@@ -73,7 +104,10 @@ function clearErrors() {
     errorMessages.forEach((error) => (error.textContent = ""));
 
     const inputs = document.querySelectorAll("input");
-    inputs.forEach((input) => input.classList.remove("invalid"));
+    inputs.forEach((input) => {
+        input.classList.remove("invalid");
+        input.classList.remove("valid");
+    });
 
     document.getElementById("successMessage").textContent = "";
 }
